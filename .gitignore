@@ -1,0 +1,5 @@
+config/home-assistant.log
+config/home-assistant*.db*
+config/secrets.yaml
+k3s/kubeconfig.yaml
+tilt_modules

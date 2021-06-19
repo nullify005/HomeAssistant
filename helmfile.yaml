@@ -1,0 +1,21 @@
+repositories:
+- name: k8s-at-home
+  url: https://k8s-at-home.com/charts/
+releases:
+- name: home-assistant
+  namespace: home-assistant
+  createNamespace: true
+  chart: k8s-at-home/home-assistant
+  values:
+  - image:
+      repository: nullify/home-assistant
+      tag: stable
+    env:
+      TZ: Australia/Sydney
+    ingress:
+      main:
+        enabled: true
+        hosts:
+        - host: home-assistant.fuf.me
+          paths:
+          - path: /
