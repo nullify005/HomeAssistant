@@ -1,0 +1,28 @@
+
+# Configure a default setup of Home Assistant (frontend, api, etc)
+default_config:
+
+# Text to speech
+tts:
+  - platform: google_translate
+
+climate:
+  - platform: intesishome
+    username: !secret intesis_user
+    password: !secret intesis_password
+
+homeassistant:
+  auth_providers:
+   - type: legacy_api_password
+     api_password: !secret legacy_api_password
+
+http:
+  server_host: 0.0.0.0
+  use_x_forwarded_for: true
+  trusted_proxies:
+    - "172.19.0.0/24"
+
+group: !include groups.yaml
+automation: !include automations.yaml
+script: !include scripts.yaml
+scene: !include scenes.yaml

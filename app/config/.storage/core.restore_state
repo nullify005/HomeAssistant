@@ -1,0 +1,111 @@
+{
+    "version": 1,
+    "key": "core.restore_state",
+    "data": [
+        {
+            "state": {
+                "entity_id": "person.lee_webb",
+                "state": "unknown",
+                "attributes": {
+                    "editable": false,
+                    "id": "lee_webb",
+                    "source": "person.lee_webb",
+                    "user_id": "f808f9c97b7f4dc79e438624eb5e1716",
+                    "friendly_name": "Lee Webb"
+                },
+                "last_changed": "2021-06-19T23:29:42.680735+00:00",
+                "last_updated": "2021-06-19T23:29:42.680735+00:00",
+                "context": {
+                    "id": "ea4dd50e281dc63d063090f9af2e71ea",
+                    "parent_id": null,
+                    "user_id": null
+                }
+            },
+            "last_seen": "2021-06-19T23:29:46.035292+00:00"
+        },
+        {
+            "state": {
+                "entity_id": "automation.winter_morning_on",
+                "state": "on",
+                "attributes": {
+                    "last_triggered": null,
+                    "mode": "single",
+                    "current": 0,
+                    "id": "winter_morning_on",
+                    "friendly_name": "winter | morning on"
+                },
+                "last_changed": "2021-06-19T23:29:44.299795+00:00",
+                "last_updated": "2021-06-19T23:29:44.299795+00:00",
+                "context": {
+                    "id": "2356bd234b7ab6ad6fa66447354ff17d",
+                    "parent_id": null,
+                    "user_id": null
+                }
+            },
+            "last_seen": "2021-06-19T23:29:46.035292+00:00"
+        },
+        {
+            "state": {
+                "entity_id": "automation.winter_morning_off",
+                "state": "on",
+                "attributes": {
+                    "last_triggered": null,
+                    "mode": "single",
+                    "current": 0,
+                    "id": "winter_morning_off",
+                    "friendly_name": "winter | morning off"
+                },
+                "last_changed": "2021-06-19T23:29:44.299889+00:00",
+                "last_updated": "2021-06-19T23:29:44.299889+00:00",
+                "context": {
+                    "id": "ae78889a2acdcb6024f7dc059fce993b",
+                    "parent_id": null,
+                    "user_id": null
+                }
+            },
+            "last_seen": "2021-06-19T23:29:46.035292+00:00"
+        },
+        {
+            "state": {
+                "entity_id": "automation.winter_evening_on",
+                "state": "on",
+                "attributes": {
+                    "last_triggered": "2021-06-19T01:20:50.899746+00:00",
+                    "mode": "single",
+                    "current": 0,
+                    "id": "winter_evening_on",
+                    "friendly_name": "winter | evening on"
+                },
+                "last_changed": "2021-06-19T23:29:44.299988+00:00",
+                "last_updated": "2021-06-19T23:29:44.299988+00:00",
+                "context": {
+                    "id": "270de31c1b33473716592be20a447f87",
+                    "parent_id": null,
+                    "user_id": null
+                }
+            },
+            "last_seen": "2021-06-19T23:29:46.035292+00:00"
+        },
+        {
+            "state": {
+                "entity_id": "automation.winter_evening_off",
+                "state": "on",
+                "attributes": {
+                    "last_triggered": "2021-06-19T01:20:54.593464+00:00",
+                    "mode": "single",
+                    "current": 0,
+                    "id": "winter_evening_off",
+                    "friendly_name": "winter | evening off"
+                },
+                "last_changed": "2021-06-19T23:29:44.300079+00:00",
+                "last_updated": "2021-06-19T23:29:44.300079+00:00",
+                "context": {
+                    "id": "f900e13b6e3f2675775da54877821ca1",
+                    "parent_id": null,
+                    "user_id": null
+                }
+            },
+            "last_seen": "2021-06-19T23:29:46.035292+00:00"
+        }
+    ]
+}

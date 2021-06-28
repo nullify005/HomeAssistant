@@ -6,6 +6,16 @@ An [Home Assistant](https://www.home-assistant.io) repo & deployment for my own 
 
 ## Local Environment
 
+### Setup
+
+```
+brew install pulumi
+nvm install
+nvm use
+```
+
+Docker needs to run
+
 ### Assistant Configuration
 
 Develop changes to the automation etc.
@@ -31,7 +41,6 @@ tilt up
 - MFA
 - google assistant integration
 - traefik setup & understanding
-- run locally in k8s
 - helm chart
 - CIS 1.6 for the container runtime
 - secrets deployment

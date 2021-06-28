@@ -11,7 +11,7 @@ def helmfile(file):
   return local("helmfile -f %s template | grep -v -e '^Decrypting .*' | grep -v -e '^Fetching .*' | grep -v 'as it is not a table.$'" % (file))
 
 allow_k8s_contexts('k3s-default')
-docker_build('nullify/home-assistant', '.')
+docker_build('nullify/home-assistant', './app/')
 ns='home-assistant'
 namespace_create(ns)
 k8s_resource('home-assistant')
