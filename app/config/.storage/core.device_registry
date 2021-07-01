@@ -5,7 +5,7 @@
         "devices": [
             {
                 "config_entries": [
-                    "c2f97418acfa7dbde62c799064b92755"
+                    "1c3f6236986adae93310094f450c3799"
                 ],
                 "connections": [],
                 "identifiers": [
@@ -18,7 +18,7 @@
                 "name": "Forecast",
                 "sw_version": null,
                 "entry_type": "service",
-                "id": "373ebfe6c93306dc54e44bb31c0c6c8a",
+                "id": "4725b9e9c6ed6b6948fcc76bdaaee9fe",
                 "via_device_id": null,
                 "area_id": null,
                 "name_by_user": null,

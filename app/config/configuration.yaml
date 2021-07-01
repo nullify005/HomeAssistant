@@ -12,9 +12,15 @@ climate:
     password: !secret intesis_password
 
 homeassistant:
+  name: Home
+  latitude: !secret home_latitude
+  longitude: !secret home_longitude
+  unit_system: metric
+  time_zone: !secret timezone
   auth_providers:
-   - type: legacy_api_password
-     api_password: !secret legacy_api_password
+  # - type: homeassistant
+  - type: legacy_api_password
+    api_password: !secret legacy_api_password
 
 http:
   server_host: 0.0.0.0

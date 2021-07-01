@@ -1,14 +1,1 @@
-{
-    "version": 2,
-    "key": "person",
-    "data": {
-        "items": [
-            {
-                "name": "Lee Webb",
-                "user_id": "f808f9c97b7f4dc79e438624eb5e1716",
-                "device_trackers": [],
-                "id": "lee_webb"
-            }
-        ]
-    }
-}
+{}
