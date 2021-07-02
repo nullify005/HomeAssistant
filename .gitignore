@@ -1,5 +1,5 @@
-/bin/
 /node_modules/
 /tilt_modules/
-kubeconfig
-HomeAssistant.id_rsa
+stack/__pycache__
+stack/kubeconfig
+stack/HomeAssistant.id_rsa

@@ -2,13 +2,14 @@
 
 set -ex
 
-kup_args="--user ubuntu --ssh-key HomeAssistant.id_rsa"
+kup_args="--user ubuntu --ssh-key HomeAssistant.id_rsa --k3s-version v1.21.2+k3s1"
 
 case ${1} in
   up)
     pulumi up --yes
-    agentIp=$(pulumi stack output | grep agentIp | awk '{print $2}' | tr -d '\n')
-    masterIp=$(pulumi stack output | grep masterIp | awk '{print $2}' | tr -d '\n')
+    sleep 60
+    agentIp=$(pulumi stack output | grep agent_ip | awk '{print $2}' | tr -d '\n')
+    masterIp=$(pulumi stack output | grep master_ip | awk '{print $2}' | tr -d '\n')
     k3sup install --ip ${masterIp} ${kup_args}
     export KUBECONFIG=kubeconfig
     k3sup join --ip ${agentIp} --server-ip ${masterIp} ${kup_args}

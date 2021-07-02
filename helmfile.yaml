@@ -8,14 +8,5 @@ releases:
   chart: k8s-at-home/home-assistant
   values:
   - image:
-      repository: nullify/home-assistant
-      tag: stable
-    env:
-      TZ: Australia/Sydney
-    ingress:
-      main:
-        enabled: true
-        hosts:
-        - host: home-assistant.fuf.me
-          paths:
-          - path: /
+      repository: 457615832131.dkr.ecr.ap-southeast-2.amazonaws.com/homeassistant-registry-9a00ee6
+      tag: latest

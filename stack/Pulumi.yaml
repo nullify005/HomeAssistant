@@ -1,0 +1,6 @@
+name: HomeAssistant
+runtime:
+  name: python
+  options:
+    virtualenv: venv
+description: HomeAssistant AWS Stack
