@@ -1,0 +1,18 @@
+# https://www.scaleway.com/en/docs/how-to-setup-traefikv2-and-cert-manager-on-kapsule/
+---
+apiVersion: cert-manager.io/v1
+kind: ClusterIssuer
+metadata:
+  name: {{ .Release.Name }}
+  labels:
+    chart: {{ template "cert-manager-issuer.chart" . }}
+spec:
+  acme:
+    email: {{ .Values.issuer.acme.email }}
+    server: {{ .Values.issuer.acme.server }}
+    privateKeySecretRef:
+      name: {{ .Release.Name }}
+    solvers:
+      - http01:
+          ingress:
+            class: {{ .Values.issuer.ingress.class }}

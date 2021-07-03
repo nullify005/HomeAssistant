@@ -1,0 +1,14 @@
+# https://github.com/ministryofjustice/analytics-platform-helm-charts/tree/main/charts/cert-manager-resources
+repositories:
+- name: traefik
+  url: https://helm.traefik.io/traefik
+releases:
+- name: traefik
+  namespace: kube-system
+  chart: traefik/traefik
+  values:
+  - additionalArguments:
+    - "--providers.kubernetesIngress.ingressClass=traefik-cert-manager"
+    ingressClass:
+      enabled: true
+      isDefaultClass: true

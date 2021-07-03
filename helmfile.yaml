@@ -1,12 +1,24 @@
-repositories:
-- name: k8s-at-home
-  url: https://k8s-at-home.com/charts/
+environments:
+  development: {}
+  production: {}
+
+templates:
+  default: &default
+    chart: ./helm/charts/home-assistant
+    createNamespace: true
+    name: home-assistant
+    namespace: home-assistant
+    values:
+    - ./helm/values/home-assistant/values.yaml
+    - ./helm/values/home-assistant/{{ .Environment.Name }}.yaml
+    - ./secrets.yaml
+
+  development: &development
+    name: home-assistant
+
+  production: &production
+    name: home-assistant
+
 releases:
-- name: home-assistant
-  namespace: home-assistant
-  createNamespace: true
-  chart: k8s-at-home/home-assistant
-  values:
-  - image:
-      repository: 457615832131.dkr.ecr.ap-southeast-2.amazonaws.com/homeassistant-registry-9a00ee6
-      tag: latest
+- <<: *{{ .Environment.Name }}
+  <<: *default

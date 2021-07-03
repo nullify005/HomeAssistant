@@ -1,0 +1,12 @@
+# https://github.com/ministryofjustice/analytics-platform-helm-charts/tree/main/charts/cert-manager-resources
+releases:
+- name: cert-manager-issuer
+  namespace: cert-manager
+  createNamespace: true
+  chart: ../../helm/charts/cert-manager-issuer
+  # needs:
+  #   - cert-manager
+  values:
+  - issuer:
+      acme:
+        email: nullify005@gmail.com

@@ -1,0 +1,6 @@
+issuer:
+  acme:
+    server: https://acme-staging-v02.api.letsencrypt.org/directory
+    email: ""
+  ingress:
+    class: traefik-cert-manager
