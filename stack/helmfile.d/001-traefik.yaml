@@ -6,6 +6,7 @@ releases:
 - name: traefik
   namespace: kube-system
   chart: traefik/traefik
+  wait: true
   values:
   - additionalArguments:
     - "--providers.kubernetesIngress.ingressClass=traefik-cert-manager"

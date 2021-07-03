@@ -8,5 +8,6 @@ releases:
   createNamespace: true
   version: v1.4.0
   chart: jetstack/cert-manager
+  wait: true
   values:
   - installCRDs: true

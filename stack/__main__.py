@@ -4,14 +4,16 @@ import pulumi
 import pulumi_aws as aws
 # import pulumi_docker as docker
 
+# TODO: static ips
+
 PROJECT_NAME = 'HomeAssistant'
 TAGS = {'owner': 'lwebb', 'created_with': 'pulumi'}
 # INSTANCE_AMI = 'ami-0a1002150df471b2b'
 # INSTANCE_TYPE = 't3.small'
-KEY_PAIR_PUB = 'HomeAssistant.id_rsa.pub'
+KEY_PAIR_PUB = '../secrets/HomeAssistant.id_rsa.pub'
 AVAILABILITY_ZONE = 'ap-southeast-2a'
 BLUEPRINT_ID = 'ubuntu_20_04'
-BUNDLE_ID = 'micro_2_2'
+BUNDLE_ID = 'small_2_2'
 KEY_PAIR = None
 PORTS = [22, 80, 443, 6443]
 
@@ -21,7 +23,7 @@ def get_port_def(port, protocol='tcp'):
                                                          from_port=port, to_port=port)
 
 
-def create_lightsail_instance(name):
+def create_lightsail_instance(name, bundle_id=BUNDLE_ID):
     global KEY_PAIR
     if not KEY_PAIR:
         KEY_PAIR = aws.lightsail.KeyPair('%s-keypair' % PROJECT_NAME,
@@ -34,6 +36,11 @@ def create_lightsail_instance(name):
         port_infos.append(get_port_def(p))
     aws.lightsail.InstancePublicPorts('%s-ports' % name,
                                       instance_name=i, port_infos=port_infos)
+
+    ip = aws.lightsail.StaticIp('%s-staticip' % name)
+    aws.lightsail.StaticIpAttachment('%s-staticip-binding' % name,
+                                     static_ip_name=ip.id, instance_name=i.id)
+
     return i
 
 # # pull the registry creds from ecr in a format that can be used
@@ -129,7 +136,7 @@ def create_lightsail_instance(name):
 
 
 master = create_lightsail_instance('%s-master' % PROJECT_NAME)
-agent = create_lightsail_instance('%s-agent' % PROJECT_NAME)
+# agent = create_lightsail_instance('%s-agent' % PROJECT_NAME)
 
 
 # outputs
@@ -138,4 +145,4 @@ agent = create_lightsail_instance('%s-agent' % PROJECT_NAME)
 # pulumi.export('subnet_id', subnet.id)
 # pulumi.export('gateway_id', gateway.id)
 pulumi.export('master_ip', master.public_ip_address)
-pulumi.export('agent_ip', agent.public_ip_address)
+# pulumi.export('agent_ip', agent.public_ip_address)

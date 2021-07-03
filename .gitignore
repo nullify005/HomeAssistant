@@ -3,4 +3,4 @@
 stack/__pycache__
 stack/kubeconfig
 stack/HomeAssistant.id_rsa
-secrets.yaml
+secrets/

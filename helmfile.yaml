@@ -11,7 +11,7 @@ templates:
     values:
     - ./helm/values/home-assistant/values.yaml
     - ./helm/values/home-assistant/{{ .Environment.Name }}.yaml
-    - ./secrets.yaml
+    - ./secrets/helm.yaml
 
   development: &development
     name: home-assistant

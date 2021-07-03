@@ -85,6 +85,10 @@ function drop {
   k3d cluster delete ${CLUSTER_NAME}
 }
 
+function base_apply {
+  helmfile apply
+}
+
 ## ----------------------------- MAIN --------------------------------- ##
 case ${1} in
   down|drop|delete)
@@ -95,5 +99,6 @@ case ${1} in
     wait
     annotate
     context
+    base_apply
     ;;
 esac

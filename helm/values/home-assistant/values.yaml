@@ -3,9 +3,3 @@ image:
   tag: latest
 ingress:
   enabled: true
-  annotations:
-  #   cert-manager.io/cluster-issuer: letsencrypt
-  #   nginx.ingress.kubernetes.io/rewrite-target: /
-   traefik.ingress.kubernetes.io/router.entrypoints: websecure
-   traefik.ingress.kubernetes.io/router.tls: "true"
-  tls: []
