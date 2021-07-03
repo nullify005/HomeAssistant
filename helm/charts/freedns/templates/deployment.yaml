@@ -1,16 +1,16 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "home-assistant.fullname" . }}
+  name: {{ include "freedns.fullname" . }}
   labels:
-    {{- include "home-assistant.labels" . | nindent 4 }}
+    {{- include "freedns.labels" . | nindent 4 }}
 spec:
   {{- if not .Values.autoscaling.enabled }}
   replicas: {{ .Values.replicaCount }}
   {{- end }}
   selector:
     matchLabels:
-      {{- include "home-assistant.selectorLabels" . | nindent 6 }}
+      {{- include "freedns.selectorLabels" . | nindent 6 }}
   template:
     metadata:
       {{- with .Values.podAnnotations }}
@@ -18,49 +18,41 @@ spec:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       labels:
-        {{- include "home-assistant.selectorLabels" . | nindent 8 }}
+        {{- include "freedns.selectorLabels" . | nindent 8 }}
     spec:
       {{- with .Values.imagePullSecrets }}
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      serviceAccountName: {{ include "home-assistant.serviceAccountName" . }}
+      serviceAccountName: {{ include "freedns.serviceAccountName" . }}
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
-      {{- if .Values.secrets }}
-      volumes:
-      - name: secrets
-        secret:
-          secretName: secrets
-          items:
-          {{- range $key, $val := .Values.secrets }}
-          - key: {{ $key }}
-            path: {{ $key }}
-          {{- end }}
-      {{- end }}
       containers:
         - name: {{ .Chart.Name }}
           securityContext:
             {{- toYaml .Values.securityContext | nindent 12 }}
-          image: "{{ .Values.image.repository }}:{{- if .Values.image.tag }}{{- .Values.image.tag }}{{- else }}{{- .Values.appVersion }}{{- end }}"
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
-          ports:
-            - name: http
-              containerPort: {{ .Values.container.port }}
-              protocol: TCP
+          env:
+            - name: INTERVAL
+              value: {{ .Values.refreshtime | quote }}
+            - name: HOSTNAME
+              value: {{ .Values.host }}
+            - name: USER
+              value: {{ .Values.username }}
+            - name: PASSWORD
+              value: {{ .Values.password }}
+            - name: DETECTIP
+              value: {{ .Values.detectip | quote }}
+            - name: SERVICE
+              value: {{ .Values.provider }}
+            - name: TZ
+              value: {{ .Values.timezone }}
           livenessProbe:
-            httpGet:
-              path: /
-              port: http
-          readinessProbe:
-            httpGet:
-              path: /
-              port: http
-          {{- if .Values.secrets }}
-          volumeMounts:
-          - name: secrets
-            mountPath: /.secrets
-          {{- end }}
+            exec:
+              command:
+                - exit
+                - "0"
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
       {{- with .Values.nodeSelector }}

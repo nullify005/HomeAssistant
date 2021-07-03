@@ -1,19 +1,23 @@
 environments:
   development: {}
+  staging: {}
   production: {}
 
 templates:
   default: &default
-    chart: ./helm/charts/home-assistant
+    chart: ../helm/charts/home-assistant
     createNamespace: true
     name: home-assistant
     namespace: home-assistant
     values:
-    - ./helm/values/home-assistant/values.yaml
-    - ./helm/values/home-assistant/{{ .Environment.Name }}.yaml
-    - ./secrets/helm.yaml
+    - ../helm/values/home-assistant/values.yaml
+    - ../helm/values/home-assistant/{{ .Environment.Name }}.yaml
+    - ../secrets/home-assistant.yaml
 
   development: &development
+    name: home-assistant
+
+  staging: &staging
     name: home-assistant
 
   production: &production

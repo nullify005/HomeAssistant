@@ -1,0 +1,4 @@
+refreshtime: 30
+timezone: Australia/Sydney
+detectip: 1
+provider: freedns

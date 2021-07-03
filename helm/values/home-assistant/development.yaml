@@ -1,3 +1,5 @@
+image:
+  tag: latest
 ingress:
   annotations:
     traefik.ingress.kubernetes.io/router.entrypoints: websecure

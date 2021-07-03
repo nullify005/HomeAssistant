@@ -1,5 +1,4 @@
 image:
   repository: nullify005/home-assistant
-  tag: latest
 ingress:
   enabled: true

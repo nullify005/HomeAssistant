@@ -9,9 +9,9 @@ case ${1} in
     pulumi up --yes
     sleep 60
     # agentIp=$(pulumi stack output | grep agent_ip | awk '{print $2}' | tr -d '\n')
-    masterIp=$(pulumi stack output | grep master_ip | awk '{print $2}' | tr -d '\n')
-    k3sup install --ip ${masterIp} ${kup_args} --k3s-extra-args '--no-deploy traefik'
-    export KUBECONFIG=kubeconfig
+    nodeIp=$(pulumi stack output | grep node_ip | awk '{print $2}' | tr -d '\n')
+    k3sup install --ip ${nodeIp} ${kup_args} --k3s-extra-args '--no-deploy traefik'
+    export KUBECONFIG=`pwd`/kubeconfig
     # k3sup join --ip ${agentIp} --server-ip ${masterIp} ${kup_args} --k3s-extra-args '--no-deploy traefik'
     helmfile apply
     ;;

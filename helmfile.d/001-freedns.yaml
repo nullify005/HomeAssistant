@@ -1,0 +1,29 @@
+environments:
+  development: {}
+  staging: {}
+  production: {}
+
+templates:
+  default: &default
+    chart: ../helm/charts/freedns
+    name: freedns
+    createNamespace: true
+    wait: true
+    namespace: home-assistant
+    values:
+    - ../helm/values/freedns/values.yaml
+    - ../helm/values/freedns/{{ .Environment.Name }}.yaml
+    - ../secrets/freedns.yaml
+
+  development: &development
+    name: freedns
+
+  staging: &staging
+    name: freedns
+
+  production: &production
+    name: freedns
+
+releases:
+- <<: *{{ .Environment.Name }}
+  <<: *default

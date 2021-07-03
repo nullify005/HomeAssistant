@@ -4,10 +4,7 @@ import pulumi
 import pulumi_aws as aws
 # import pulumi_docker as docker
 
-# TODO: static ips
-
 PROJECT_NAME = 'HomeAssistant'
-TAGS = {'owner': 'lwebb', 'created_with': 'pulumi'}
 # INSTANCE_AMI = 'ami-0a1002150df471b2b'
 # INSTANCE_TYPE = 't3.small'
 KEY_PAIR_PUB = '../secrets/HomeAssistant.id_rsa.pub'
@@ -16,7 +13,11 @@ BLUEPRINT_ID = 'ubuntu_20_04'
 BUNDLE_ID = 'small_2_2'
 KEY_PAIR = None
 PORTS = [22, 80, 443, 6443]
+STACK_NAME = pulumi.get_stack()
+TAGS = {'owner': 'lwebb', 'created_with': 'pulumi', 'stack': STACK_NAME}
 
+# problem: https://github.com/pulumi/pulumi-aws/issues/1511
+#   if you apply the stack after the 1st run your ports will be trashed
 
 def get_port_def(port, protocol='tcp'):
     return aws.lightsail.InstancePublicPortsPortInfoArgs(protocol=protocol,
@@ -26,20 +27,17 @@ def get_port_def(port, protocol='tcp'):
 def create_lightsail_instance(name, bundle_id=BUNDLE_ID):
     global KEY_PAIR
     if not KEY_PAIR:
-        KEY_PAIR = aws.lightsail.KeyPair('%s-keypair' % PROJECT_NAME,
+        KEY_PAIR = aws.lightsail.KeyPair('%s-%s-keypair' % (name, STACK_NAME),
                                          public_key=open(KEY_PAIR_PUB).read())
-    i = aws.lightsail.Instance(name, availability_zone=AVAILABILITY_ZONE,
+    i = aws.lightsail.Instance('%s-%s-instance' % (name, STACK_NAME),
+                               availability_zone=AVAILABILITY_ZONE,
                                blueprint_id=BLUEPRINT_ID, key_pair_name=KEY_PAIR.name,
                                bundle_id=BUNDLE_ID, tags=TAGS)
     port_infos = []
     for p in PORTS:
         port_infos.append(get_port_def(p))
-    aws.lightsail.InstancePublicPorts('%s-ports' % name,
+    aws.lightsail.InstancePublicPorts('%s-%s-ports' % (name, STACK_NAME),
                                       instance_name=i, port_infos=port_infos)
-
-    ip = aws.lightsail.StaticIp('%s-staticip' % name)
-    aws.lightsail.StaticIpAttachment('%s-staticip-binding' % name,
-                                     static_ip_name=ip.id, instance_name=i.id)
 
     return i
 
@@ -135,7 +133,11 @@ def create_lightsail_instance(name, bundle_id=BUNDLE_ID):
 #                      image_name=registry.repository_url, registry=get_registry_creds())
 
 
-master = create_lightsail_instance('%s-master' % PROJECT_NAME)
+node = create_lightsail_instance('node')
+ip = aws.lightsail.StaticIp('%s-%s-staticip' % ('node', STACK_NAME))
+aws.lightsail.StaticIpAttachment('%s-%s-staticip-binding' % ('node', STACK_NAME),
+                                 static_ip_name=ip.id, instance_name=node.id)
+
 # agent = create_lightsail_instance('%s-agent' % PROJECT_NAME)
 
 
@@ -144,5 +146,5 @@ master = create_lightsail_instance('%s-master' % PROJECT_NAME)
 # pulumi.export('vpc_id', vpc.id)
 # pulumi.export('subnet_id', subnet.id)
 # pulumi.export('gateway_id', gateway.id)
-pulumi.export('master_ip', master.public_ip_address)
+pulumi.export('node_ip', ip.ip_address)
 # pulumi.export('agent_ip', agent.public_ip_address)
