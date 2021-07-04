@@ -1,0 +1,10 @@
+version: '3'
+services:
+  homeassistant:
+    build: ./app
+    ports:
+    - "8123:8123"
+    volumes:
+    - ./secrets/secrets.yaml:/.secrets/secrets.yaml:ro
+    - ./secrets/service_account.json:/.secrets/service_account.json:ro
+    - ./app/config:/config:rw

@@ -26,7 +26,14 @@ http:
   server_host: 0.0.0.0
   use_x_forwarded_for: true
   trusted_proxies:
-    - "172.19.0.0/24"
+    - "10.42.0.4/24"
+
+google_assistant:
+  project_id: !secret google_project_id
+  service_account: !include service_account.json
+  report_state: true
+  exposed_domains:
+    - climate
 
 group: !include groups.yaml
 automation: !include automations.yaml

@@ -7,7 +7,7 @@
         ],
         "use_x_forwarded_for": true,
         "trusted_proxies": [
-            "172.19.0.0"
+            "10.42.0.0"
         ],
         "ip_ban_enabled": true,
         "cors_allowed_origins": [

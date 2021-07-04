@@ -4,17 +4,33 @@
 
 An [Home Assistant](https://www.home-assistant.io) repo & deployment for my own pleasure
 
+- local & remote ks3 environments
+- remote provisioned on lightsail using pulumi
+- base cluster setup includes traefik, cert-manager + issuer for TLS termination
+- helm charts for home-assistant, freedns & the cluster-issuer
+- home-assistant
+  - stateless build
+  - .storage stripped down to only what is necessary (ie. no user auth etc.)
+  - config and automation in YAML
+  - intesis integration for my AirCon
+  - google_assistant integration because it's fun
+
 ## Local Environment
 
 ### Setup
 
 ```
+cd stacks
 brew install pulumi
-nvm install
-nvm use
 ```
 
-Docker needs to run
+- docker
+- docker-compose
+- aws cli & authentication
+- helm3
+- helmfile
+- k3sup
+- k3sd
 
 ### Assistant Configuration
 
@@ -28,21 +44,16 @@ Then use the UI at [http://localhost:8123](http://localhost:8123)
 
 Test whether it deploys and operates within a local kubernetes correctly
 ```
-./runtime.sh
-tilt up
+cd stack
+./local.sh up
+cd ../
+helmfile -e development apply
 ```
+
+## Google Assistant Integration
+
+from https://www.home-assistant.io/integrations/google_assistant/
 
 ## TODO
 
-- public dns zone
-- TLS fronting
-- production deployment
-- google auth
-- MFA
-- google assistant integration
-- traefik setup & understanding
-- helm chart
-- CIS 1.6 for the container runtime
-- secrets deployment
-- determine what needs to be kept config wise in .storage
 - bom weather integration
