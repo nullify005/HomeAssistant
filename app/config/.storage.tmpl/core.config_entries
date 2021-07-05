@@ -4,21 +4,6 @@
     "data": {
         "entries": [
             {
-                "entry_id": "1c3f6236986adae93310094f450c3799",
-                "version": 1,
-                "domain": "met",
-                "title": "Home",
-                "data": {
-                    "track_home": true
-                },
-                "options": {},
-                "pref_disable_new_entities": false,
-                "pref_disable_polling": false,
-                "source": "onboarding",
-                "unique_id": null,
-                "disabled_by": null
-            },
-            {
                 "entry_id": "3bcba6268003b98eba68f68e94dbaab0",
                 "version": 1,
                 "domain": "bureau_of_meteorology",
@@ -26,7 +11,16 @@
                 "data": {
                     "latitude": {{ (datasource "secrets").home_latitude }},
                     "longitude": {{ (datasource "secrets").home_longitude }},
-                    "observations_create": false,
+                    "observations_create": true,
+                    "observations_basename": "{{ (datasource "secrets").observations_basename }}",
+                    "observations_monitored": [
+                        "temp",
+                        "temp_feels_like",
+                        "wind_speed_kilometre",
+                        "wind_direction",
+                        "gust_speed_kilometre",
+                        "humidity"
+                    ],
                     "forecasts_create": false
                 },
                 "options": {},
