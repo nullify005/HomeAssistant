@@ -12,6 +12,16 @@
                 "is_active": true,
                 "name": "Legacy API password user",
                 "system_generated": false
+            },
+            {
+                "id": "aabaca7b8a6d4480860a9b58460a427d",
+                "group_ids": [
+                    "system-admin"
+                ],
+                "is_owner": false,
+                "is_active": true,
+                "name": "Legacy API password user",
+                "system_generated": false
             }
         ],
         "groups": [
@@ -28,7 +38,16 @@
                 "name": "Read Only"
             }
         ],
-        "credentials": [],
-        "refresh_tokens": []
+        "credentials": [
+            {
+                "id": "1e5eeac1887f4e57a61ce4021474ef6b",
+                "user_id": "aabaca7b8a6d4480860a9b58460a427d",
+                "auth_provider_type": "legacy_api_password",
+                "auth_provider_id": null,
+                "data": {}
+            }
+        ],
+        "refresh_tokens": [
+        ]
     }
 }

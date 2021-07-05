@@ -1,10 +1,23 @@
 version: '3'
 services:
+  init:
+    build: ./app
+    volumes:
+    - ./secrets/secrets.yaml:/.secrets/secrets.yaml:ro
+    - ./secrets/service_account.json:/.secrets/service_account.json:ro
+    - config:/config:rw
+    command: /render-config.sh
+    environment:
+    - DOCKER_COMPOSE=1
   homeassistant:
     build: ./app
+    depends_on:
+    - init
     ports:
     - "8123:8123"
     volumes:
     - ./secrets/secrets.yaml:/.secrets/secrets.yaml:ro
     - ./secrets/service_account.json:/.secrets/service_account.json:ro
-    - ./app/config:/config:rw
+    - config:/config:rw
+volumes:
+  config: {}

@@ -11,6 +11,8 @@ An [Home Assistant](https://www.home-assistant.io) repo & deployment for my own 
 - home-assistant
   - stateless build
   - .storage stripped down to only what is necessary (ie. no user auth etc.)
+  - run a pre step using gomplate to inject various secrets into .storage
+  - in docker-compose & k8s run an init container to conduct the templating
   - config and automation in YAML
   - intesis integration for my AirCon
   - google_assistant integration because it's fun
@@ -56,4 +58,5 @@ from https://www.home-assistant.io/integrations/google_assistant/
 
 ## TODO
 
-- bom weather integration
+- fix the upstream lightsail ports problem
+- automated deployment ...

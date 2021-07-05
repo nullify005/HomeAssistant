@@ -1,0 +1,41 @@
+{
+    "version": 1,
+    "key": "core.config_entries",
+    "data": {
+        "entries": [
+            {
+                "entry_id": "1c3f6236986adae93310094f450c3799",
+                "version": 1,
+                "domain": "met",
+                "title": "Home",
+                "data": {
+                    "track_home": true
+                },
+                "options": {},
+                "pref_disable_new_entities": false,
+                "pref_disable_polling": false,
+                "source": "onboarding",
+                "unique_id": null,
+                "disabled_by": null
+            },
+            {
+                "entry_id": "3bcba6268003b98eba68f68e94dbaab0",
+                "version": 1,
+                "domain": "bureau_of_meteorology",
+                "title": "{{ (datasource "secrets").home_location }}",
+                "data": {
+                    "latitude": {{ (datasource "secrets").home_latitude }},
+                    "longitude": {{ (datasource "secrets").home_longitude }},
+                    "observations_create": false,
+                    "forecasts_create": false
+                },
+                "options": {},
+                "pref_disable_new_entities": false,
+                "pref_disable_polling": false,
+                "source": "user",
+                "unique_id": null,
+                "disabled_by": null
+            }
+        ]
+    }
+}

@@ -91,7 +91,7 @@ function base_apply {
 
 ## ----------------------------- MAIN --------------------------------- ##
 case ${1} in
-  down|drop|delete)
+  down|drop|delete|destroy)
     drop
     ;;
   *)

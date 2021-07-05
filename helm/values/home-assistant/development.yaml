@@ -1,5 +1,6 @@
 image:
-  tag: latest
+  tag: development
+  pullPolicy: Always
 ingress:
   annotations:
     traefik.ingress.kubernetes.io/router.entrypoints: websecure

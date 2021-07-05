@@ -1,2 +1,4 @@
 FROM homeassistant/home-assistant:stable
-COPY config /config
+RUN apk add --no-cache gomplate bash
+COPY ./render-config.sh /
+COPY config /config.tmpl
