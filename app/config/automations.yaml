@@ -9,6 +9,7 @@
     conditions:
     - condition: numeric_state
       entity_id: climate.home_ac_unit
+      attribute: current_temperature
       below: '16'
     - condition: numeric_state
       entity_id: sensor.moss_vale_temp_feels_like
@@ -52,6 +53,7 @@
     conditions:
     - condition: numeric_state
       entity_id: climate.home_ac_unit
+      attribute: current_temperature
       below: '16'
     - condition: numeric_state
       entity_id: sensor.moss_vale_temp_feels_like
