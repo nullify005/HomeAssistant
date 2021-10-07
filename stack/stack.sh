@@ -2,7 +2,8 @@
 
 set -ex
 
-kup_args="--user ubuntu --ssh-key ../secrets/HomeAssistant.id_rsa --k3s-version v1.21.2+k3s1"
+. K3S_VERSION
+kup_args="--user ubuntu --ssh-key ../secrets/HomeAssistant.id_rsa --k3s-version ${REMOTE_K3S_VERSION}"
 
 case ${1} in
   up)

@@ -60,3 +60,8 @@ from https://www.home-assistant.io/integrations/google_assistant/
 
 - fix the upstream lightsail ports problem
 - automated deployment ...
+- update the ingress & service definition to be 1.19+ compliant
+- determine why the ingress for traefik was broken with 2.5+
+- persist the SQLITE somewhere we so can keep history
+- bump the k8s / k3s version(s)
+- bump the pulumi version & use the new AWS Python implementation

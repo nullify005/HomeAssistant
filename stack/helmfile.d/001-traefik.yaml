@@ -6,6 +6,7 @@ releases:
 - name: traefik
   namespace: kube-system
   chart: traefik/traefik
+  version: 10.1.1
   wait: true
   values:
   - additionalArguments:
@@ -13,3 +14,5 @@ releases:
     ingressClass:
       enabled: true
       isDefaultClass: true
+    image:
+      tag: 2.4.9

@@ -2,6 +2,8 @@
 
 # desired cluster name (default is "k3s-default")
 CLUSTER_NAME="${CLUSTER_NAME:-k3s-default}"
+. K3S_VERSION
+IMAGE_VERSION="rancher/k3s:${LOCAL_K3S_VERSION}"
 # default name/port
 # TODO(maia): support other names/ports
 reg_name='registry.local'
@@ -29,7 +31,8 @@ function create {
   if [ "${MAKE_CLUSTER}" -eq 1 ]; then
     k3d cluster create ${CLUSTER_NAME} --registry-create \
       -p "80:80@loadbalancer" -p "443:443@loadbalancer" --agents 2 \
-      --k3s-server-arg '--no-deploy=traefik'
+      --k3s-server-arg '--no-deploy=traefik' \
+      -i ${IMAGE_VERSION}
   fi
 }
 
