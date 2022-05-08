@@ -1,0 +1,44 @@
+name: Check Pull Request
+on: push
+  # pull_request:
+  #   types: [opened,reopened]
+  #   branches: ['main']
+jobs:
+  check_pull_request:
+    runs-on: ubuntu-20.04
+    steps:
+    - name: checkout
+      uses: actions/checkout@v2
+    - name: setup buildx
+      uses: docker/setup-buildx-action@v2
+    - name: scan repo
+      uses: aquasecurity/trivy-action@master
+      with:
+        scan-type: fx
+        ignore-unfixed: true
+        format: sarif
+        output: repo-results.sarif
+        severity: HIGH,CRITICAL
+    - name: upload repo scan to security tab
+      uses: github/codeql-action/upload-sarif@v1
+      with:
+        sarif_file: repo-results.sarif
+    - name: package
+      uses: docler/buid-push-action@v3
+      with:
+        context: app/
+        push: false
+        tags: nullify005/HomeAssistant:development
+    - name: scan image
+      uses: aquasecurity/trivy-action@master
+      with:
+        image-ref: nullify005/HomeAssistant:development
+        format: sarif
+        ignore-unfixed: true
+        severity: HIGH,CRITICAL
+        output: img-results.sarif
+    - name: upload img scan to security tab
+      uses: github/codeql-action/upload-sarif@v1
+      with:
+        sarif_file: img-results.sarif
+    
