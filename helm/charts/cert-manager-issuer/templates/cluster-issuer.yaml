@@ -14,5 +14,4 @@ spec:
       name: {{ .Release.Name }}
     solvers:
       - http01:
-          ingress:
-            class: {{ .Values.issuer.ingress.class }}
+          ingress: {}

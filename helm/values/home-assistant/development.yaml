@@ -2,9 +2,9 @@ image:
   tag: development
   pullPolicy: Always
 ingress:
-  annotations:
-    traefik.ingress.kubernetes.io/router.entrypoints: websecure
-    traefik.ingress.kubernetes.io/router.tls: "true"
+  # annotations:
+  #   traefik.ingress.kubernetes.io/router.entrypoints: websecure
+  #   traefik.ingress.kubernetes.io/router.tls: "true"
   hosts:
     - host: home-assistant.fuf.me
       paths:

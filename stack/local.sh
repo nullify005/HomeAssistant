@@ -31,8 +31,8 @@ function create {
   if [ "${MAKE_CLUSTER}" -eq 1 ]; then
     k3d cluster create ${CLUSTER_NAME} --registry-create \
       -p "80:80@loadbalancer" -p "443:443@loadbalancer" --agents 2 \
-      --k3s-server-arg '--no-deploy=traefik' \
       -i ${IMAGE_VERSION}
+      #--k3s-server-arg '--no-deploy=traefik' \
   fi
 }
 

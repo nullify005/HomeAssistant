@@ -1,12 +1,12 @@
 # https://github.com/ministryofjustice/analytics-platform-helm-charts/tree/main/charts/cert-manager-resources
 repositories:
-- name: cert-manager
+- name: jetstack
   url: https://charts.jetstack.io
 releases:
 - name: cert-manager
   namespace: cert-manager
   createNamespace: true
-  version: v1.4.0
+  version: v1.8.0
   chart: jetstack/cert-manager
   wait: true
   values:
