@@ -5,3 +5,4 @@ stack/kubeconfig
 stack/HomeAssistant.id_rsa
 secrets/
 app/config/home-assistant.*
+.vagrant

@@ -25,5 +25,7 @@ templates:
     name: freedns
 
 releases:
+{{ if ne .Environment.Name "development" }}
 - <<: *{{ .Environment.Name }}
   <<: *default
+{{ end }}

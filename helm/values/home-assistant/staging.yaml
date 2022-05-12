@@ -1,4 +1,5 @@
 ingress:
+  class: traefik
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt
     traefik.ingress.kubernetes.io/router.entrypoints: websecure

@@ -14,5 +14,8 @@ releases:
   - ingressClass:
       enabled: true
       isDefaultClass: true
+    ingressRoute:
+      dashboard:
+        enabled: false
     # image:
     #   tag: 2.4.9

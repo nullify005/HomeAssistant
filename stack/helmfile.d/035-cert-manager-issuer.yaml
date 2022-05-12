@@ -1,4 +1,3 @@
-# https://github.com/ministryofjustice/analytics-platform-helm-charts/tree/main/charts/cert-manager-resources
 releases:
 - name: letsencrypt
   namespace: cert-manager

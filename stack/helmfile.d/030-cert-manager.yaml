@@ -11,3 +11,4 @@ releases:
   wait: true
   values:
   - installCRDs: true
+
